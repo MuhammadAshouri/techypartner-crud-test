@@ -1,0 +1,30 @@
+﻿@page "/View/{id:int}"
+
+<PageTitle>View User</PageTitle>
+
+<div class="list-items small">
+    @if (User is not null)
+    {
+        @if (ShowError)
+        {
+            <span class="error-message">@Error</span>
+        }
+        <div class="buttons">
+            <a class="button-new" href="/">Back to list</a>
+            <a class="button-new" href="/Edit/@User.Id">Edit</a>
+            <a class="button-new" href="" @onclick="DeleteItem">Delete</a>
+        </div>
+
+        <div class="item-view">
+            <h1>@User.FirstName @User.LastName</h1>
+            <span>@User.Email</span>
+            <span style="color: #b32121;">@User.Gender</span>
+            <span style="color: @(User.Status ? "#26b050" : "#b32121");">@(User.Status ? "Active" : "InActive")</span>
+            <span>@User.CreatedDate</span>
+        </div>
+    }
+    else
+    {
+        <div class="spinner"></div>
+    }
+</div>

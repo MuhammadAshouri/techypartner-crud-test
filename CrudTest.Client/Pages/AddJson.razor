@@ -1,0 +1,27 @@
+﻿@page "/AddJson"
+
+<PageTitle>Add User From JSON</PageTitle>
+
+<div class="form-box small">
+    <form>
+        @if (ShowMessage)
+        {
+            <span class="error-message@(IsError ? "" : " no-error")">@Messages</span>
+        }
+        <div class="input-box">
+            <label for="fname-inp">Json File</label>
+            <InputFile OnChange="FileInputChanged" id="fname-inp"/>
+        </div>
+        <div class="button-box">
+            @if (ShowButtons)
+            {
+                <div @onclick="SubmitUsers" class="button inline">Submit</div>
+                <a href="/" class="button outline">Back to list</a>
+            }
+            else
+            {
+                <div class="button outline">Processing...</div>
+            }
+        </div>
+    </form>
+</div>

@@ -1,0 +1,56 @@
+﻿@page "/Edit/{id:int}"
+
+<PageTitle>Edit User</PageTitle>
+
+<div class="form-box medium">
+    @if (User is not null)
+    {
+        <EditForm Model="User" OnValidSubmit="SubmitUser">
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
+            @if (ShowMessage)
+            {
+                <span class="error-message@(IsError ? "" : " no-error")">@Messages</span>
+            }
+            <div class="input-box">
+                <label for="fname-inp">Firstname</label>
+                <InputTextOnInput id="fname-inp" @bind-Value="User.FirstName"/>
+            </div>
+            <div class="input-box">
+                <label for="lname-inp">Lastname</label>
+                <InputTextOnInput id="lname-inp" @bind-Value="User.LastName"/>
+            </div>
+            <div class="input-box">
+                <label for="email-inp">Email</label>
+                <InputTextOnInput id="email-inp" @bind-Value="User.Email"/>
+            </div>
+            <div class="input-box">
+                <label for="gender-inp" class="last">Gender</label>
+                <InputSelect id="gender-inp" TValue="string" @bind-Value="User.Gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Others">Others</option>
+                </InputSelect>
+            </div>
+            <div class="input-box">
+                <label for="status-inp" class="last">Status</label>
+                <input type="checkbox" id="status-inp" @onchange="SubmitStatus" />
+            </div>
+            <div class="button-box">
+                @if (ShowButtons)
+                {
+                    <button type="submit" class="button inline">Submit</button>
+                    <a href="/View/@Id" class="button outline">Back to view</a>
+                }
+                else
+                {
+                    <div class="button outline">Processing...</div>
+                }
+            </div>
+        </EditForm>
+    }
+    else
+    {
+        <div class="spinner"></div>
+    }
+</div>

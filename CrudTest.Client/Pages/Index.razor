@@ -1,0 +1,49 @@
+﻿@page "/"
+@using BlazorPagination
+
+<PageTitle>Users</PageTitle>
+
+<div class="list-items">
+    @if (Users is not null)
+    {
+        <div class="buttons">
+            <a href="/Add" class="button-new">New User</a>
+            <a href="/AddJson" class="button-new">Add User from JSON</a>
+        </div>
+
+        <div class="search-box">
+            <EditForm Model="SearchModel">
+                <InputText @bind-Value="SearchModel.Text"/>
+                <div class="button" @onclick="async _ => await FetchNewData(1)"></div>
+            </EditForm>
+        </div>
+
+        <div class="items">
+            @if (Users.Any())
+            {
+                foreach (var user in Users)
+                {
+                    <div class="item">
+                        <h1 class="title">@user.FirstName @user.LastName</h1>
+                        <span>@user.Email</span>
+                        <span style="color: #b32121">@user.Gender</span>
+                        <a href="/View/@user.Id"></a>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="no-item">No records</div>
+            }
+        </div>
+
+        if (Users.Any())
+        {
+            <BlazorPager CurrentPage="@Page" PageCount="@(TotalCount / Size)" OnPageChanged="FetchNewData" NextText=">" PreviousText="<" />
+        }
+    }
+    else
+    {
+        <div class="spinner"></div>
+    }
+</div>
