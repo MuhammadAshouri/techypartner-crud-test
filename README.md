@@ -1,1 +1,1 @@
-# Techypartner Crud-Test
+# Asp.Net Core Crud-Test
